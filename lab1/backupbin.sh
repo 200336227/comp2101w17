@@ -1,5 +1,6 @@
 #!/bin/bash 
+# This script backup my personal bin to my personal backup directory
 
-rsync -r ~/bin ~/comp2101w17/backup
+rsync -av ~/bin ~/comp2101w17/backup
 
 

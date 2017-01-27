@@ -1,5 +1,5 @@
 #!/bin/bash
-# Display public IP Address
+# This script display public IP Address
 
 curl icanhazip.com ; echo
 
