@@ -23,7 +23,7 @@ osversion=$(uname -mrs | awk '{print $2}')
 cpu=$(lscpu | sed -n '2p;13p;15p' && printf \n)
 
 # For Memory installed
-mem=$(free -h | sed -n '1,2p')
+mem=$(vmstat -s | grep memory)
 
 # For available disk space
 disk=$(df -h | sed -n '1p;4p')
