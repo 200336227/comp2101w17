@@ -5,8 +5,8 @@
 interfaces=( $(ifconfig | grep '^[A-Za-z]' | awk '{print $1}') )
 
 # Find the ip address of the interfaces
-ip0=$(ifconfig ${interfaces[0]} | sed -n '/inet addr:/s/.*addr:\([0-9.][0-9.]*\).*/\1/p')
-ip1=$(ifconfig ${interfaces[1]} | sed -n '/inet addr:/s/.*addr:\([0-9.][0-9.]*\).*/\1/p')
+ip0=$(ifconfig ${interfaces[0]} | sed -n '/inet addr:/s/.*addr:\([0-9.][0-9.]*\) .*/\1/p')
+ip1=$(ifconfig ${interfaces[1]} | sed -n '/inet addr:/s/.*addr:\([0-9.][0-9.]*\) .*/\1/p')
 
 # Extract default gateway ip from the route table
 gw=$(route -n | awk '/^0.0.0.0/{print $2}')
