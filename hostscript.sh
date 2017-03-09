@@ -16,20 +16,20 @@ interfaces=( $(ifconfig | grep '^[A-Za-z]' | awk '{print $1}') )
 ip0=$(ifconfig ${interfaces} | sed -n '/inet addr:/s/.*addr:\([0-9.][0-9.]*\).*/\1/p')
 
 # For OS name and version
-osname=$(uname -mrs | awk '{print $1}')
-osversion=$(uname -mrs | awk '{print $2}')
+osname=$(cat /etc/os-release | grep -E PRETTY_NAME | awk -F\" '{print $2}')
+osversion=$(cat /etc/os-release  | grep -E "VERSION=" | awk -F\" '{print $2}')
 
 # For CPU specification
 cpu=$(lscpu | sed -n '2p;13p;15p' && printf \n)
 
 # For Memory installed
-mem=$(vmstat -s | grep memory)
+mem=$(free -h | sed -n '1p' | awk '{print $1,$2,$3}' && free -h | grep -E Mem: | awk '{print $2,$3,$4}')
 
 # For available disk space
 disk=$(df -h | sed -n '1p;4p')
 
 # For List of installed printers
-print=$(lpstat -p | awk '{ print $2}')
+print=$(lpstat -a | awk '{ print $1}')
 
 # For list of installed software
 soft=$(cat /var/lib/apt/extended_states)
@@ -72,12 +72,12 @@ do
 		"CPU description")
 			echo "You choose option 6"
 			sleep 3
-			echo -e "The current system's CPU specification\n$cpu"
+			echo -e "The current system's CPU specifications are below:\n$cpu"
 			;;
 		"Memory installed")
 			echo "You choose option 7"
 			sleep 3
-			echo -e "Installed memory of the current system is\n$mem"
+			echo -e "Installed memory of the current system are \n$mem"
 			;;
 		"Disk space")
 			echo "You choose option 8"
@@ -99,6 +99,8 @@ do
 			;;
 		"Quit")
 			break
+			;;
+		*) echo "Invalid Option!!!"
 			;;
 	esac
 done

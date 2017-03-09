@@ -1,0 +1,10 @@
+#!/bin/bash
+# Main Menu for User Choose Options
+
+echo "Hello. Today is `date`"
+PS3='Please enter the options you are looking for: '
+options=("System Name" "Domain Name" "IP address" "OS name" "OS version" "CPU d$
+
+# For hostname
+host=$(hostname)
+
