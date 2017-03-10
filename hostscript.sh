@@ -100,7 +100,7 @@ do
 		"Quit")
 			break
 			;;
-		*) echo "Invalid Option!!!"
+		*) echo "Invalid Option!!! Please try again"
 			;;
 	esac
 done
